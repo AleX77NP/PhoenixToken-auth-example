@@ -48,6 +48,7 @@ defmodule FoodWeb do
 
       import Plug.Conn
       import Phoenix.Controller
+      import FoodWeb.Auth, only: [authenticate_api_user: 2]
     end
   end
 

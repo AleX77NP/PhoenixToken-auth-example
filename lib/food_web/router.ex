@@ -3,10 +3,11 @@ defmodule FoodWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug FoodWeb.Auth
   end
 
   scope "/api", FoodWeb do
-    pipe_through :api
+    pipe_through [:api,:authenticate_api_user]
 
     resources "/menu", MealController
   end
