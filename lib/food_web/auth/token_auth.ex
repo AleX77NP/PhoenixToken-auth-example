@@ -6,13 +6,6 @@ defmodule FoodWeb.Auth do
   import Plug.Conn
   import Phoenix.Controller
 
-  def get_users() do
-    users = [
-      %{"id" => 1,"username" => "admin", "password" => "admin", "role" => :admin},
-      %{"id" => 2, "username" => "customer", "password" => "12345", "role" => :customer}
-    ]
-    users
-  end
 
   def init(opts), do: opts
 
@@ -51,7 +44,7 @@ defmodule FoodWeb.Auth do
 
     Phoenix.Token.verify(
       FoodWeb.Endpoint,
-      "mysupersecret",
+      "supersecret",
       token,
       max_age: one_month
     )
@@ -64,13 +57,5 @@ defmodule FoodWeb.Auth do
     end
   end
 
-  def login(username, password) do
-    user = Enum.find(get_users(), fn user -> user["username"] == username and user["password"] == password end)
-    if user == nil do
-      :ok
-    else
-      :notfound
-    end
-  end
 
 end
